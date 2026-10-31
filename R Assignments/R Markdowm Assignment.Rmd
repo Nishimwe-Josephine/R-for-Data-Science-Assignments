@@ -1,0 +1,265 @@
+---
+title: "R Assignment"
+author: "Josephine"
+studentid: 20252MBI040
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#ASSIGNMENT1
+
+## IMPORTING DATA FROM STATISTICAL PACKAGES AND DATABASE MANAGEMENT SYSTEM.
+
+### FROM STATISTICAL PACKAGES
+
+#### IMPORTING DATA FROM EXCEL.
+
+```{r}
+library(readxl)
+
+# Load Excel Data
+data_excel <- read_excel("D:/Users/josephine.nishimwe_o/Desktop/26A Intercrop Data Analysis/data/26A_Intercrop_updated.xlsx")
+data_csv <- read.csv("C:/Users/josephine.nishimwe_o/Desktop/mydata.csv")
+
+# View the dataset
+head(data_excel)
+
+# Check the number of rows and columns
+dim(data_excel)
+
+# Display column names
+names(data_excel)
+```
+
+#### IMPORTING DATA FROM SPSS, SAS AND STATA
+
+```{r}
+# Load the packages
+library(haven)
+library(foreign)
+
+# Import the data
+data_spss <- read_sav("C:/Users/josephine.nishimwe_o/Desktop/mydata.sav")
+data_stata <- read_dta("C:/Users/josephine.nishimwe_o/Desktop/mydata.dta")
+data_sas <- read_sas("C:/Users/josephine.nishimwe_o/Desktop/mydata.sas7bdat")
+
+# If the SAS data is stored in a transport file (.xpt):
+data_sas_xpt <- read_xpt("C:/Users/josephine.nishimwe_o/Desktop/mydata.xpt")
+
+# Simple data view
+head(data_spss)
+dim(data_spss)
+names(data_spss)
+str(data_spss)
+summary(data_spss)
+
+# Number of missing values in each column
+colSums(is.na(data_spss))
+
+# Convert to standard data frame if needed
+data_spss <- as.data.frame(data_spss)
+```
+
+#### IMPORT DATA FROM DBMS (SQLite)
+
+```{r}
+library(DBI)
+library(RSQLite)
+
+# Create a database file on your computer
+con <- dbConnect(
+  RSQLite::SQLite(),
+  "agricultural_trials.db"
+)
+
+# Create sample data
+trial_data <- data.frame(
+  farmer_id = c(101, 102, 103, 104),
+  treatment = c("Control", "Rocket", "BTK", "Chamak"),
+  yield_t_ha = c(2.1, 2.8, 3.4, 3.2)
+)
+
+# Save the data as a database table
+dbWriteTable(
+  con,
+  "trial_results",
+  trial_data,
+  overwrite = TRUE
+)
+
+dbListTables(con)
+
+data <- dbReadTable(
+  con,
+  "trial_results"
+)
+
+print(data)
+
+# Query selected data using SQL
+data_filtered <- dbGetQuery(
+  con,
+  "SELECT *
+   FROM trial_results
+   WHERE yield_t_ha > 3"
+)
+
+print(data_filtered)
+
+# Disconnect when finished
+dbDisconnect(con)
+```
+
+#### IMPORT DATA FROM MYSQL / MARIADB
+
+```{r, eval=FALSE}
+library(DBI)
+library(RMariaDB)
+
+# Note: Set eval=FALSE so R Markdown doesn't fail when knitting without an active database connection
+con <- dbConnect(
+  RMariaDB::MariaDB(),
+  dbname = "your_database",
+  host = "your_server",
+  port = 3306,
+  user = "your_username",
+  password = "your_password"
+)
+
+data_mysql <- dbGetQuery(
+  con,
+  "SELECT * FROM your_table LIMIT 100"
+)
+
+dbDisconnect(con)
+```
+
+#### IMPORT DATA FROM API (COMMCARE)
+
+```{r, eval=FALSE}
+library(httr2)
+library(jsonlite)
+library(dplyr)
+
+# Project domain and credentials
+domain <- "your-project-domain"
+url <- paste0("[https://www.commcarehq.org/a/](https://www.commcarehq.org/a/)", domain, "/api/form/v1/")
+
+username <- "your_username"
+api_key <- "your_api_key"
+
+# Send request
+response <- request(url) |>
+  req_auth_basic(username, api_key) |>
+  req_url_query(limit = 20, offset = 0) |>
+  req_perform()
+
+resp_status(response)
+
+# Read the response
+result <- resp_body_json(response, simplifyVector = FALSE)
+length(result$objects)
+str(result$objects[[1]])
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

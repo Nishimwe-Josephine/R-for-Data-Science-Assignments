@@ -1,0 +1,434 @@
+---
+title: "Assignment 2"
+author: "Josephine NISHIMWE"
+Student_id: 20252MBI040
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## NUMERIC IN R
+### Data summary
+```{r cars}
+summary(cars)
+
+
+x <- c(0.5, 0.6) 
+age<-c(20,35,32,29)
+summary(age)
+
+```
+View(cars)
+
+##Mean calculation
+
+```{r}
+age<-c(35,24,18,24)
+mean(age)
+```
+##Logical
+
+```{r}
+x <- c(TRUE,FALSE)
+x <- c(T, F) 
+```
+## Charactor
+```{r}
+x <- c("a", "b", "c" )
+class<-c("M","F","F","M")
+
+```
+## Integer
+```{r}
+x <- 10:30 
+
+## Complex
+x <- c(1+0i, 2+4i)
+
+## Matrix and Operation within Matrix
+
+(x<- matrix(1:6, nrow = 2, ncol = 3))
+
+```
+```{r}
+(y<-matrix(1:6, nrow = 3, ncol = 2))
+```
+
+```{r}
+x%*%y
+
+```
+
+## List
+```{r}
+(x <- list(1, "a", TRUE, 1 + 4i))
+```
+## List
+```{r}
+(x <- list(1, "a", TRUE, 1 + 4i))
+```
+
+```{r}
+x
+```
+
+##Factor
+```{r}
+x <- factor(c("yes", "yes", "no", "yes", "no"))
+x
+```
+
+
+## Create a vector with na
+```{r}
+x <- c(1, 2, NA, 10, 3)
+```
+
+
+##check where is na.
+```{r}
+is.na(x)
+```
+
+
+```{r}
+x <- c(1, 2, 4, "NA", 5)  
+bad <- is.na(x)  
+print(bad)
+is.na(x)
+```
+
+```{r}
+x[!bad]
+
+```
+
+
+
+## TAKING THE SUBSET FROM MANY R OBJECTS WITH NO MISSING VALUES
+
+```{r}
+x <- c(1, 2, NA, 4, NA, 5) 
+y <- c("a", "b", NA, "d", NA, "f")  
+good <- complete.cases(x, y)  
+good
+
+```
+
+##If a vector only contains logical and numbers, R will convert the logical to numbers, Every true becomes a 1, and every FALSE becomes 0
+
+```{r}
+sum(c(TRUE,TRUE,FALSE,FALSE,FALSE))
+
+```
+
+### Creating DATA
+```{r}
+studentID<-c(1,2,3,4,5)
+math_score<-c(12,17,10,9,NA)
+gender<-c("M","F","M","M","F")
+it_score<-c(13,18,11,10,19)
+scoredata<-data.frame(studentID,gender,math_score,it_score)
+scoredata
+```
+
+```{r}
+View(scoredata)
+```
+
+## Create data from keyboard
+
+
+
+```{r}
+data_class2<-data.frame(height=numeric(0),weight=numeric(0),bmi=numeric(0))
+data_class2<-edit(data_class2)
+```
+
+
+##Data Importation
+```{r}
+data_class <- read.csv("D:/Users/josephine.nishimwe_o/Desktop/Height_data.csv")
+variable.names(data_class)
+```
+
+```{r}
+head(data_class)
+```
+
+```{r}
+tail(data_class)
+```
+
+```{r}
+data_class[5:10,]
+```
+
+
+## By using available data
+
+```{r}
+data()  
+data("airquality")
+variable.names(airquality)
+```
+
+```{r}
+data()  
+data("airquality")
+variable.names(airquality)
+```
+
+```{r}
+
+str(airquality)
+```
+
+
+```{r}
+
+str(airquality)
+```
+
+
+```{r}
+data_class
+```
+
+
+```{r}
+summary(data_class)
+```
+
+
+```{r}
+str(data_class)
+```
+
+## Summary statistics
+```{r}
+summary(data_class)
+```
+
+```{r}
+apply(data_class,1,mean)
+```
+
+```{r}
+apply(data_class,2,sd)
+```
+
+
+
+
+
+
+```{r}
+c(mean(data_class$Weight),sd(data_class$Height))
+```
+
+```{r}
+c(mean(data_class$Weight),sd(data_class$Weight))
+```
+
+```{r}
+c(Mean=mean(data_class$Height),SD=sd(data_class$Weight))
+```
+
+
+```{r}
+c(Mean=mean(data_class$Weight),SD=sd(data_class$Weight))
+```
+
+```{r}
+c(Mean=mean(data_class$Weight),SD=sd(data_class$Weight))
+```
+
+
+##Relationship between a categorical and a continuous variable
+
+
+```{r}
+data("iris")
+head(iris)
+```
+
+
+```{r}
+mean(iris$Petal.Length)
+```
+
+```{r}
+mean(iris$Petal.Length[iris$Species=="setosa"])
+```
+
+```{r}
+mean(iris$Petal.Length[iris$Species=="versicolor"])
+```
+
+```{r}
+mean(iris$Petal.Length[iris$Species=="virginica"])
+```
+
+##Shortcut
+
+```{r}
+by(iris$Petal.Length,iris$Species,mean)
+
+```
+
+```{r}
+by(iris$Petal.Length,iris$Species,sd)
+
+```
+
+```{r}
+by(iris$Petal.Length,iris$Species,summary)
+
+```
+## Data Visualiztion
+```{r}
+boxplot(iris$Sepal.Length~iris$Species,data=iris, main="Comparison of categorical vs quantitative")
+
+```
+
+
+
+
+
+
+```{r}
+boxplot(iris$Sepal.Length~iris$Species,data=iris, main="Comparison of categorical vs quantitative")
+
+```
+
+
+##Relationship between two categorical variables
+```{r}
+ucba<-data.frame(UCBAdmissions)
+head(ucba)
+```
+
+```{r}
+cross<-xtabs(Freq~Gender+Admit,data=ucba)
+(cross<-xtabs(Freq~Gender+Admit,data=ucba))
+```
+
+## Is there gender bias in UCB graduate admission process?
+
+```{r}
+prop.table(cross,1)
+```
+##Simpson’s paradox
+
+```{r}
+cross2<-xtabs(Freq~Gender+Admit,data=ucba[ucba$Dept=="F",])
+prop.table(cross2,1)
+```
+##Bar chat
+
+```{r}
+dat <- read.table(text ="ProdA ProdB ProdC ProdD
+1 110 50 60 70 
+2 120 50 80 65", header= TRUE)
+
+  barplot(as.matrix(dat),beside=TRUE,col=c("Red","green"))
+```
+
+
+#barplot(as.matrix(dat),beside=TRUE,col=c("gold3","red"))
+
+```{r}
+
+dat <- read.table(text = "A   B   C   D   E   F    G
+1 10 80 30 90 70 60  90
+2 20 50 70 50 40 10  40
+3 60 80 80 60  60 30 160
+4 20 40 70 80 20 10  70", header = TRUE)
+
+barplot(as.matrix(dat))
+```
+##Scatter plot
+```{r}
+plot(Weight~Height,data=data_class)
+```
+
+
+
+```{r}
+plot(data_class$Height,data_class$Weight)
+```
+
+```{r}
+plot(data_class[,1],data_class[,2],main = "Graph")
+```
+
+
+```{r}
+cor(data_class$Height,data_class$Weight)
+```
+##Linear Models
+```{r}
+plot(Weight~Height,data=data_class)
+abline(lm(Weight~Height,data=data_class)$coefficient)
+```
+
+
+```{r}
+plot(Weight~Height,data=data_class)
+abline(lm(Weight~Height,data=data_class)$coefficient)
+```
+
+
+```{r}
+data_lm<-lm(Height~Weight,data=data_class)
+summary(data_lm)
+
+```
+
+
+```{r}
+plot(data_lm)
+
+```
+
+
+
+```{r}
+hist(data_class$Height)
+
+```
+
+```{r}
+
+hist(data_class$Weight,col = "blue")
+```
+
+##LINEAR WITH OTHER LINE
+
+```{r}
+plot(Weight~Height,data=data_class)
+abline(lm(Weight~Height,data=data_class)$coefficient)
+lines(lowess(data_class$Height,data_class$Weight),col="blue")
+```
+
+
+```{r}
+cor(data_class$Height,data_class$Weight)
+```
+```{r}
+lm(Weight~Height,data=data_class)
+```
+
+## Data Management
+
+```{r}
+attach(data_class)
+(BMI<-Weight/(Height/100)^2)
+```
+```{r}
+(BMI<-round(Weight/(Height/100)^2,digit=2))
+```
