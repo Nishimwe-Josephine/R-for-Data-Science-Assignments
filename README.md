@@ -1,6 +1,4 @@
-# R  Assignment 
-
-This project demonstrates how to import data from different sources using R, including CSV, APIs, MySQL databases, and datasets included in R packages.
+# R  Assignment
 
 ## Student Information
 
@@ -18,15 +16,6 @@ This project demonstrates how to import data from different sources using R, inc
 
 - `R Assignment` — R Markdown source code containing the assignment 1.
 - `README.md` — project documentation.
-## Learning Outcomes
-
-Through this assignment, I gained practical experience in:
-
-- Importing data from multiple sources using R.
-- Working with CSV, Excel, and SPSS files.
-- Accessing data from APIs and websites.
-- Connecting R to MySQL databases.
-- Exploring and inspecting datasets.
 
 
 
